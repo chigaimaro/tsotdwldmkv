@@ -1,14 +1,13 @@
 # Include required files
 param (
     [CmdletBinding()]
-    $videosPath = $PSScriptRoot
+    $videosPath = "D:\test"
  )
 
 try {
-    . ("$PSScriptRoot\main-lib.ps1")
-    . ("$PSScriptRoot\itunes-movies.ps1")
-    . ("$PSScriptRoot\itunes-tv.ps1")
-    . ("$PSScriptRoot\crunchyroll.ps1")
+    . (".\main-lib.ps1")
+    . (".\it.ps1")
+    . (".\cyroll.ps1")
 }
 catch {
     Write-Host $Error[0] -ForegroundColor Red
@@ -19,14 +18,7 @@ $mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
 $mkvEditPath = "C:\Program Files\MKVToolNix\mkvpropedit.exe"
 $subtitleEditPath = "C:\Program Files\Subtitle Edit\SubtitleEdit.exe"
 
-function Read-TargetDirectory {
-    param(
-        $videosPath
-    )
-    $videoExtensions = @("*.mp4")
-    $queue = Get-ChildItem -Path $videosPath -Include $videoExtensions -Recurse
-    return (, $queue)
-}
+
 
 
 function Start-Conversion {
@@ -41,7 +33,7 @@ function Start-Conversion {
     }
 
     foreach ($nextVideo in $videoQueue) {
-        $subtitleType = $null
+       $subTitleType = Set-SubtitleType $nextVideo
     }
 
 }
