@@ -7,11 +7,17 @@ function Set-SubtitleType {
     )
         
     # iTunes movies - Folder with the same name (subs extracted with Tuneskit)
-    $itmDIR = Test-iTunesMovieSubs $inputFile
+    if (Test-iTunesMovieSubs $inputFile){
+        return "itms"
+    }
     # iTunes TV - Same File name - SRT extension (subs extracted with CCextractor)
-    $ittvDIR = Test-iTunesTVSubs $inputFile
+    elseif (Test-iTunesTVSubs $inputFile) {
+        return "ittv"
+    }
     # Crunchyroll - Same file name - additional enUS (subs extracted with Allavsoft)
-    $crunchySub = Test-CrunchyLanguage $inputFile
+    elseif (Test-CrunchyLanguage $inputFile) {
+        return "chry"
+    }
 }
 
 function Set-OutputMKV {

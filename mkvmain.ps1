@@ -11,7 +11,7 @@ try {
 }
 catch {
     Write-Host $Error[0] -ForegroundColor Red
-    Read-Host -Prompt "Press the 'Enter' to exit" 
+    Read-Host -Prompt "Press the 'Enter' key to exit" 
 }
 # Setup Variables
 $mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
@@ -34,6 +34,7 @@ function Start-Conversion {
 
     foreach ($nextVideo in $videoQueue) {
        $subTitleType = Set-SubtitleType $nextVideo
+       $subTitleType
     }
 
 }

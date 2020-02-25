@@ -1,5 +1,5 @@
 # for Itunes Movies
-funtion Test-iTunesTVSubs {
+function Test-iTunesTVSubs {
     param (
         $inputFile
     )
@@ -9,7 +9,7 @@ funtion Test-iTunesTVSubs {
 }
 
 
-funtion Test-iTunesMovieSubs {
+function Test-iTunesMovieSubs {
     param (
         $inputFile
     )
