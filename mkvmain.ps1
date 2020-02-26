@@ -1,4 +1,4 @@
-# Include required files
+﻿# Include required files
 param (
     [CmdletBinding()]
     $videosPath = "D:\test"
@@ -16,7 +16,6 @@ catch {
 # Setup Variables
 $mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
 $mkvEditPath = "C:\Program Files\MKVToolNix\mkvpropedit.exe"
-$subtitleEditPath = "C:\Program Files\Subtitle Edit\SubtitleEdit.exe"
 
 
 
@@ -34,7 +33,11 @@ function Start-Conversion {
 
     foreach ($nextVideo in $videoQueue) {
        $subTitleType = Set-SubtitleType $nextVideo
-       $subTitleType
+       $convertARGs = Get-FullArgs $nextVideo $subTitleType
+       #TODO
+       Invoke-VideoMux $convertARGs
+       Invoke-SessionCleanup $nextVideo $subTitleType
+       
     }
 
 }

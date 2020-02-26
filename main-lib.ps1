@@ -1,4 +1,4 @@
-# generic functions
+﻿# generic functions
 . (".\it.ps1")
 . (".\cyroll.ps1")
 function Set-SubtitleType {
@@ -33,4 +33,21 @@ function Read-TargetDirectory {
     $videoExtensions = @("*.mp4")
     $queue = Get-ChildItem -Path $videosPath -Include $videoExtensions -Recurse
     return (, $queue)
+}
+
+function Get-FullArgs {
+    param (
+        $inputFile,
+        $subTitleType
+    )
+    $current_mkv = $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + ".mkv"
+    $mkvArgList = @('-o', $current_mkv, $inputFile.FullName)
+    if ($subTitleType -eq "itms") {
+        $mkvArgList += Get-IttvSubs $inputFile
+    } elseif ($subTitleType -eq "ittv") {
+        $mkvArgList += Get-ItMSubs $inputFile
+    } elseif ($subTitleType -eq "chry") {
+        $mkvArgList += Get-CrunchySubTitles $inputfile
+    }
+    return $mkvArgList
 }
