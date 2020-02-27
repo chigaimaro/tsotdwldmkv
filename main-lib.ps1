@@ -54,9 +54,13 @@ function Get-MKVFullArgs {
 
 function Invoke-MKVCreator {
     param (
-        $mkvArgList
+        $mkvArgList,
+        $subTitleType
 
     )
     mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
-    & $mkvProgPath $mkvArgList | Out-Null
+    & $mkvProgPath $mkvArgList
+    if ($subTitleType -eq "chry") {
+        Set-JapaneseTrack $mkvArgList[1]
+    }
 }
