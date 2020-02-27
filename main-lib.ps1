@@ -35,7 +35,7 @@ function Read-TargetDirectory {
     return (, $queue)
 }
 
-function Get-FullArgs {
+function Get-MKVFullArgs {
     param (
         $inputFile,
         $subTitleType
@@ -50,4 +50,13 @@ function Get-FullArgs {
         $mkvArgList += Get-CrunchySubTitles $inputfile
     }
     return $mkvArgList
+}
+
+function Invoke-MKVCreator {
+    param (
+        $mkvArgList
+
+    )
+    mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
+    & $mkvProgPath $mkvArgList | Out-Null
 }

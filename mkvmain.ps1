@@ -13,13 +13,6 @@ catch {
     Write-Host $Error[0] -ForegroundColor Red
     Read-Host -Prompt "Press the 'Enter' key to exit" 
 }
-# Setup Variables
-$mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
-$mkvEditPath = "C:\Program Files\MKVToolNix\mkvpropedit.exe"
-
-
-
-
 function Start-Conversion {
     param(
         $videosPath
@@ -32,11 +25,12 @@ function Start-Conversion {
     }
 
     foreach ($nextVideo in $videoQueue) {
-       $subTitleType = Set-SubtitleType $nextVideo
-       $convertARGs = Get-FullArgs $nextVideo $subTitleType
-       #TODO
-       Invoke-VideoMux $convertARGs
-       Invoke-SessionCleanup $nextVideo $subTitleType
+        
+        $subTitleType = Set-SubtitleType $nextVideo
+        $convertARGs = Get-MKVFullArgs $nextVideo $subTitleType
+        #TODO
+        Invoke-MKVCreator $convertARGs
+        Invoke-SessionCleanup $nextVideo $subTitleType
        
     }
 

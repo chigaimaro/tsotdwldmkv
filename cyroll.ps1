@@ -79,3 +79,13 @@ function Remove-CrunchyStuff($video) {
     }
     Write-Host "done deleting files"
 }
+
+
+function Set-JapaneseTrack {
+    param (
+        $inputMKV
+    )
+    $mkvEditPath = "C:\Program Files\MKVToolNix\mkvpropedit.exe"
+    $mkvEditArgs = @("$inputMKV", "--edit", "track:2", "--set", "language=jpn", "--set", 'name="JPN Stereo 2.0"')
+    & $mkvEditPath $mkvEditArgs
+}
