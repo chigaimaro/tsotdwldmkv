@@ -31,7 +31,6 @@ function Get-CrunchySubTitles {
     return $mkvSubs
 }
 
-
 function Set-CrunchLang($current_sub) {
     $fullstring = @()
     $crunchyRollLangPattern = [regex]::new('(?<=\.).+?(?=\.)')
@@ -67,17 +66,13 @@ function Set-CrunchLang($current_sub) {
 }
 
 function Remove-CrunchyStuff($video) {
-    $newSet = $video.BaseName
-    $newSet = $newSet + ".*"
-    $removed_files = Get-ChildItem -Path $video.DirectoryName -Filter $newSet
+    $fileSet = $($video.BaseName) + ".*"
+    $removed_files = Get-ChildItem -Path $video.DirectoryName -Filter $fileSet
     foreach ($file in $removed_files) {
-        $deleted_file = $video.DirectoryName + "\\" + $file
-        $extn = [IO.Path]::GetExtension($deleted_file)
-        if ($extn -ne ".mkv") {
-            Remove-Item $deleted_file
+        if ($file.Extension -ne ".mkv") {
+            Remove-Item $file.FullName
         }
     }
-    Write-Host "done deleting files"
 }
 
 

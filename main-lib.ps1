@@ -64,3 +64,17 @@ function Invoke-MKVCreator {
         Set-JapaneseTrack $mkvArgList[1]
     }
 }
+
+function Invoke-SessionCleanup {
+    param (
+        $inputVideo,
+        $subTitleType
+    )
+
+    switch ($subTitleType) {
+        "chry" { Remove-CrunchyStuff $inputVideo; Break}
+        "itms" {  }
+        "ittv" {  }
+        Default {}
+    }
+}
