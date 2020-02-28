@@ -1,5 +1,6 @@
 ﻿# generic functions
 . (".\it.ps1")
+. (".\itm.ps1")
 . (".\cyroll.ps1")
 function Set-SubtitleType {
     param (
@@ -20,12 +21,6 @@ function Set-SubtitleType {
     }
 }
 
-function Set-OutputMKV {
-    param (
-        $inputFile
-    )
-}
-
 function Read-TargetDirectory {
     param(
         $videosPath
@@ -33,6 +28,18 @@ function Read-TargetDirectory {
     $videoExtensions = @("*.mp4")
     $queue = Get-ChildItem -Path $videosPath -Include $videoExtensions -Recurse
     return (, $queue)
+}
+
+function Test-SubPath {
+    param (
+        $inputPath
+    )
+    if ( $(Try { Test-Path -Path $inputPath.trim() -PathType Leaf } Catch { $false }) ) {
+        return $true
+      }
+     Else {
+        return $false
+      }
 }
 
 function Get-MKVFullArgs {
@@ -43,7 +50,7 @@ function Get-MKVFullArgs {
     $current_mkv = $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + ".mkv"
     $mkvArgList = @('-o', $current_mkv, $inputFile.FullName)
     if ($subTitleType -eq "itms") {
-        # TODO
+        $mkvArgList += Get-GetITMArgs $inputFile
     } elseif ($subTitleType -eq "ittv") {
         $mkvArgList += Get-IttvArgs $inputFile
     } elseif ($subTitleType -eq "chry") {
@@ -72,9 +79,9 @@ function Invoke-SessionCleanup {
     )
 
     switch ($subTitleType) {
-        "chry" { Remove-CrunchyStuff $inputVideo; Break}
-        "itms" {  }
-        "ittv" {  Remove-ITVStuff $inputVideo; Break}
+        "chry" { Remove-CrunchyStuff $inputVideo; Break }
+        "itms" { Remove-ITMStuff $inputVideo; Break }
+        "ittv" { Remove-ITVStuff $inputVideo; Break } 
         Default {}
     }
 }

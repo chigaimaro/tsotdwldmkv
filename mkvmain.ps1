@@ -7,6 +7,7 @@ param (
 try {
     . (".\main-lib.ps1")
     . (".\it.ps1")
+    . (".\itm.ps1")
     . (".\cyroll.ps1")
 }
 catch {
