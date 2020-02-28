@@ -17,7 +17,7 @@ function Test-CrunchyLanguage {
     }
 }
 
-function Get-CrunchySubTitles {
+function Get-CrunchyArgs {
     param (
         $inputFile
     )

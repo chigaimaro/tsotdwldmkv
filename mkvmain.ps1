@@ -28,8 +28,7 @@ function Start-Conversion {
         
         $subTitleType = Set-SubtitleType $nextVideo
         $convertARGs = Get-MKVFullArgs $nextVideo $subTitleType
-        #TODO
-        #Invoke-MKVCreator $convertARGs $subTitleType
+        Invoke-MKVCreator $convertARGs $subTitleType
         Invoke-SessionCleanup $nextVideo $subTitleType
        
     }

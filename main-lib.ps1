@@ -43,11 +43,11 @@ function Get-MKVFullArgs {
     $current_mkv = $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + ".mkv"
     $mkvArgList = @('-o', $current_mkv, $inputFile.FullName)
     if ($subTitleType -eq "itms") {
-        $mkvArgList += Get-IttvSubs $inputFile
+        # TODO
     } elseif ($subTitleType -eq "ittv") {
-        $mkvArgList += Get-ItMSubs $inputFile
+        $mkvArgList += Get-IttvArgs $inputFile
     } elseif ($subTitleType -eq "chry") {
-        $mkvArgList += Get-CrunchySubTitles $inputfile
+        $mkvArgList += Get-CrunchyArgs $inputfile
     }
     return $mkvArgList
 }
@@ -74,7 +74,7 @@ function Invoke-SessionCleanup {
     switch ($subTitleType) {
         "chry" { Remove-CrunchyStuff $inputVideo; Break}
         "itms" {  }
-        "ittv" {  }
+        "ittv" {  Remove-ITVStuff $inputVideo; Break}
         Default {}
     }
 }
