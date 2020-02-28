@@ -58,7 +58,7 @@ function Invoke-MKVCreator {
         $subTitleType
 
     )
-    mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
+    $mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
     & $mkvProgPath $mkvArgList
     if ($subTitleType -eq "chry") {
         Set-JapaneseTrack $mkvArgList[1]
