@@ -78,12 +78,13 @@ function Get-Language($incomingSubtitle) {
         {$_ -like "*Malay*"} {$fullstring += ("--language", "0:may", '--track-name', '0:"[Malay] Unstyled"'); break }
         {$_ -like "*Norwegian*"} {$fullstring += ("--language", "0:nor", '--track-name', '0:"[Norwegian] Unstyled"'); break }
         {$_ -like "*Polish*"} {$fullstring += ("--language", "0:pol", '--track-name', '0:"[Polish] Unstyled"'); break }
-        {$_ -like "*Portuguese(BR)*"} {$fullstring += ("--language", "0:por", '--track-name', '0:"[Portuguese(BR)] Unstyled"'); break }
-        {$_ -like "*Portuguese(PT)*"} {$fullstring += ("--language", "0:por", '--track-name', '0:"[Portuguese(PT)] Unstyled"'); break }
+        {$_ -like "*Portuguese(BR)*"} {$fullstring += ("--language", "0:por", '--track-name', '0:"[Portuguese (BR)] Unstyled"'); break }
+        {$_ -like "*Portuguese(PT)*"} {$fullstring += ("--language", "0:por", '--track-name', '0:"[Portuguese (PT)] Unstyled"'); break }
         {$_ -like "*Russian*"} {$fullstring += ("--language", "0:rus", '--track-name', '0:"[Russian] Unstyled"'); break }
         {$_ -like "*Slovenian*"} {$fullstring += ("--language", "0:slv", '--track-name', '0:"[Slovenian] Unstyled"'); break }
         {$_ -like "*Spanish(419)*"} {$fullstring += ("--language", "0:spa", '--track-name', '0:"[Español] Unstyled"'); break }
-        {$_ -like "*Spanish(ES)*"} {$fullstring += ("--language", "0:spa", '--track-name', '0:"[Español(Spain)] Unstyled"'); break }
+        {$_ -like "*Spanish(ES)*"} {$fullstring += ("--language", "0:spa", '--track-name', '0:"[Español (Spain)] Unstyled"'); break }
+        {$_ -like "*Spanish(MX)*"} {$fullstring += ("--language", "0:spa", '--track-name', '0:"[Español (Mexico)] Unstyled"'); break }
         {$_ -like "*Swedish*"} {$fullstring += ("--language", "0:swe", '--track-name', '0:"[Swedish] Unstyled"'); break }
         {$_ -like "*Thai(TH)*"} {$fullstring += ("--language", "0:tha", '--track-name', '0:"[Thai] Unstyled"'); break }
         {$_ -like "*Thai*"} {$fullstring += ("--language", "0:tha", '--track-name', '0:"[Thai] Unstyled"'); break }
