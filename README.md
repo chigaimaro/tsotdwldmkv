@@ -1,6 +1,7 @@
 ## TSOT - dwnld2MKV
 A very niche command-line tool.
-Tool is provided AS-IS and comes with no support.  
+
+This tool is provided AS-IS and comes with no support.  
 
 ### Installation - download all files into one folder
 ### Usage - dwnld2mkv.ps1 "path-to-videos"
