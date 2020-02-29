@@ -11,6 +11,7 @@ Tool is provided **AS-IS**.
 [Allavsoft](https://www.allavsoft.com/) For video files from Crunchyroll ***ONLY*** (no other website is supported).  To bind the files into a MKV:
 
  - Go Option -> Preference -> General Tab: Click "Restore to Default" button to set the File Name back to `%(title).%(ext)`
+ - Optional - One can use [Subtitle Edit](https://github.com/SubtitleEdit/subtitleedit) to remove the extra formatting from the SRT files in batches.
  ---
 [CCextractor](https://www.ccextractor.org/) - must have the following settings:
 
