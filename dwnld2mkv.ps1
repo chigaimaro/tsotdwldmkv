@@ -1,7 +1,7 @@
 ﻿# Include required files
 param (
     [CmdletBinding()]
-    $videosPath = $($PSScriptRoot)
+    [string]$videosPath = $($PSScriptRoot)
  )
 
 try {
