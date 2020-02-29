@@ -1,10 +1,12 @@
 ## TSOT - dwnld2MKV
-A very niche command-line tool.
-
-This tool is provided AS-IS and comes with no support.  
+A very niche **Windows only** command-line tool.
+Tool is provided **AS-IS**.
 
 ### Installation - download all files into one folder
+
+**Dependencies:**  Install the 64-bit version the [MKVtoolnix](https://mkvtoolnix.download/) toolkit
 ### Usage - dwnld2mkv.ps1 "path-to-videos"
+
 
 [Allavsoft](https://www.allavsoft.com/) For video files from Crunchyroll ***ONLY*** (no other website is supported).  To bind the files into a MKV:
 
