@@ -25,7 +25,7 @@ function Read-TargetDirectory {
     param(
         $videosPath
     )
-    $videoExtensions = @("*.mp4")
+    $videoExtensions = @("*.mp4","*.m4v")
     $queue = Get-ChildItem -Path $videosPath -Include $videoExtensions -Recurse
     return (, $queue)
 }
@@ -63,10 +63,16 @@ function Invoke-MKVCreator {
     param (
         $mkvArgList,
         $subTitleType
-
     )
     $mkvProgPath = "C:\Program Files\MKVToolNix\mkvmerge.exe"
     & $mkvProgPath $mkvArgList
+    # $processed_files = Start-Process -FilePath $mkvProgPath -ArgumentList $mkvArgList -Wait -PassThru
+    
+    if ($LASTEXITCODE -ne '0') {
+        Write-Output "Command failed"
+        exit(1)
+    }
+
     if ($subTitleType -eq "chry") {
         Set-JapaneseTrack $mkvArgList[1]
     }

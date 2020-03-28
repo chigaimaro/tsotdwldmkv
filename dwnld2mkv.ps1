@@ -1,7 +1,7 @@
 ﻿# Include required files
 param (
     [CmdletBinding()]
-    [string]$videosPath = $($PSScriptRoot)
+    [string]$videosPath = "D:\Prep-For-Transfer\iTunes Movies" #$($PSScriptRoot)
  )
 
 try {
@@ -28,10 +28,13 @@ function Start-Conversion {
     foreach ($nextVideo in $videoQueue) {
         
         $subTitleType = Set-SubtitleType $nextVideo
-        $convertARGs = Get-MKVFullArgs $nextVideo $subTitleType
-        Invoke-MKVCreator $convertARGs $subTitleType
-        Invoke-SessionCleanup $nextVideo $subTitleType
-       
+        if ($null -ne $subTitleType) {
+            $convertARGs = Get-MKVFullArgs $nextVideo $subTitleType
+            Invoke-MKVCreator $convertARGs $subTitleType
+            Invoke-SessionCleanup $nextVideo $subTitleType
+        } else {
+            exit(1)
+        }
     }
 
 }
