@@ -1,5 +1,6 @@
 ## TSOT - dwnld2MKV
-A very niche **Windows only** command-line tool.
+A very niche **Windows only** command-line tool that will mux video files and subtitle files created via Allavsoft, CCExtractor, and Tuneskit Subtitle Extractor.  These files are muxed into a MKV file and the originals are removed.
+
 Tool is provided **AS-IS**.
 
 ### Installation - download all files into one folder
