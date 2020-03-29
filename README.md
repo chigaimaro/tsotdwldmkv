@@ -1,3 +1,4 @@
+
 ## TSOT - dwnld2MKV
 A very niche **Windows only** command-line tool that will mux video files and subtitle files created via Allavsoft, CCExtractor, and Tuneskit Subtitle Extractor.  These files are muxed into a MKV file and the originals are removed.
 
@@ -5,8 +6,11 @@ Tool is provided **AS-IS**.
 
 ### Installation - download all files into one folder
 
-**Dependencies:**  Install the 64-bit version the [MKVtoolnix](https://mkvtoolnix.download/) toolkit
-### Usage - dwnld2mkv.ps1 "path-to-videos"
+**Dependencies:**  Install the 64-bit version the latest version of [MKVtoolnix](https://mkvtoolnix.download/)
+
+### Usage:
+dwnld2mkv.ps1 -videoPath "D:\PathToVideos"
+dwnld2mkv.ps1 -videoPath "D:\PathToVideos" -subtitleType "tksubs"
 
 
 [Allavsoft](https://www.allavsoft.com/) For video files from Crunchyroll ***ONLY*** (no other website is supported).  To bind the files into a MKV:
