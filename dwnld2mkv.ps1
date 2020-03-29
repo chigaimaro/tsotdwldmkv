@@ -1,9 +1,43 @@
-﻿# Include required files
+﻿<#
+    .SYNOPSIS
+    Creates MKV files from the MP4 and their accompanying subtitle files created with CCextract, Allavsoft, and Tuneskit Subtitle Extractor
+
+    .DESCRIPTION
+    Creates MKV files from the MP4 and their accompanying subtitle files created with CCextract, Allavsoft, and Tuneskit Subtitle Extractor
+    Takes a path and a subtitle type
+
+    .PARAMETER videoPath
+    Specifies the file name.
+
+    .PARAMETER subtitleType
+    Specifies the type of subtitles to be added to the MKV.
+    Choices are:
+    "auto"     basic subtitle type autodetection
+    "tksubs"   specifies Subtitles created using TuneskitSubtitle extractor
+    "ccex"     specifies Subtitles created using CCextractor
+    "allav"    specifies subtitles created Allavsoft Video Downloader (only works with subtitles from Crunchyroll.com)
+    
+    .INPUTS
+    None.
+
+    .OUTPUTS
+    video.MKV file with embedded softsubs
+
+    .EXAMPLE
+    C:\dwnld2mkv.ps1 -videoPath "D:\Videos\"
+
+    .EXAMPLE
+    C:\dwnld2mkv.ps1 -videoPath "D:\Videos\" -subtitleType "tksubs"
+
+    .LINK
+    Latest Version: https://github.com/chigaimaro/tsotdwldmkv
+#>
+
 param (
     [CmdletBinding()]
     [Parameter(Mandatory=$True)]
     [string]$videosPath = $($PSScriptRoot),
-    [Parameter(Mandatory=$True)]
+    [Parameter(Mandatory=$False)]
     [string]$subtitleType = "auto"
  )
 
