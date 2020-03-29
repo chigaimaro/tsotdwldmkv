@@ -13,7 +13,7 @@
     Specifies the type of subtitles to be added to the MKV.
     Choices are:
     "auto"     basic subtitle type autodetection
-    "tksubs"   specifies Subtitles created using TuneskitSubtitle extractor
+    "tnskit"   specifies Subtitles created using TuneskitSubtitle extractor
     "ccex"     specifies Subtitles created using CCextractor
     "allav"    specifies subtitles created Allavsoft Video Downloader (only works with subtitles from Crunchyroll.com)
     
@@ -35,7 +35,7 @@
 
 param (
     [CmdletBinding()]
-    [Parameter(Mandatory=$True)]
+    [Parameter(Mandatory=$False)]
     [string]$videosPath = $($PSScriptRoot),
     [Parameter(Mandatory=$False)]
     [string]$subtitleType = "auto"

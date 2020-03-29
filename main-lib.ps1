@@ -9,7 +9,7 @@ function Set-SubtitleType {
         
     # iTunes movies - Folder with the same name (subs extracted with Tuneskit)
     if (Test-TuneskitSubs $inputFile){
-        return "tksubs"
+        return "tnskit"
     }
     # iTunes TV - Same File name - SRT extension (subs extracted with CCextractor)
     elseif (Test-CCextractSubs $inputFile) {
@@ -49,7 +49,7 @@ function Get-MKVFullArgs {
     )
     $current_mkv = $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + ".mkv"
     $mkvArgList = @('-o', $current_mkv, $inputFile.FullName)
-    if ($subTitleType -eq "tnksit") {
+    if ($subTitleType -eq "tnskit") {
         $mkvArgList += Get-TNSKArgs $inputFile
     } elseif ($subTitleType -eq "ccex") {
         $mkvArgList += Get-CCeArgs $inputFile

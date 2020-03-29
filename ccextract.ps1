@@ -12,7 +12,7 @@ function Get-CCeArgs {
     param(
         $inputFile
     )
-    $fullstring = @("--language", "0:eng", "--track-name", '0:"[English] Audio Descriptions"')
+    $fullstring = @("--language", "0:eng", "--track-name", '0:"[US Closed Captions] Unstyled"')
     $fullstring += ("--default-track", "0:no")
     $fullstring += $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + ".srt"
 

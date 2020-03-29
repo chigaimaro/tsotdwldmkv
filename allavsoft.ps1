@@ -1,7 +1,7 @@
 ﻿# For crunchyroll stuff
-$Global:crunchySubs = ("arME.ass", "arME.srt", ".deDE.ass", ".deDE.srt", "frFR.srt",
- "frFR.ass", ".enUS.ass", ".enUS.srt", ".esES.ass", ".esES.srt", ".esLA.ass",
- ".esLA.srt",  "itIT.ass", "itIT.srt", "ptBR.ass", "ptBR.srt", "ruRU.ass", "ruRU.srt")
+$Global:crunchySubs = (".arME.ass", ".arME.srt", ".deDE.ass", ".deDE.srt", ".frFR.srt",
+ ".frFR.ass", ".enUS.ass", ".enUS.srt", ".esES.ass", ".esES.srt", ".esLA.ass",
+ ".esLA.srt",  ".itIT.ass", ".itIT.srt", ".ptBR.ass", ".ptBR.srt", ".ruRU.ass", ".ruRU.srt")
 
 function Test-AllavCRSubs {
     param (
