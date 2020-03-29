@@ -1,10 +1,10 @@
-﻿function Test-iTunesMovieSubs {
+﻿function Test-TuneskitSubs {
     param (
         $inputFile
     )
     # iTunes movies - Folder with the same name (subs extracted with Tuneskit)
-    $itmDIR = $(Join-Path $inputFile.DirectoryName $inputFile.BaseName)
-    if ( $(Try { Test-Path -Path $itmDIR.trim() -PathType Container} Catch { $false }) ) {
+    $tkDIR = $(Join-Path $inputFile.DirectoryName $inputFile.BaseName)
+    if ( $(Try { Test-Path -Path $tkDIR.trim() -PathType Container} Catch { $false }) ) {
         return $true
       }
      Else {
@@ -12,7 +12,7 @@
       }
 }
 
-function Get-GetITMArgs {
+function Get-TNSKArgs {
     param (
         $inputFile
     )
@@ -49,15 +49,16 @@ function Get-Language($incomingSubtitle) {
     $fullstring = @()
     $pulledFileSize = (Get-Item $incomingSubtitle).length/1KB
     switch ($incomingSubtitle) {
-        {$_ -like "*(Hant)*"} {$fullstring += ("--language", "0:chi", '--track-name', '0:[Chinese (simplified)] Unstyled'); break }
-	    {$_ -like "*Arabic*"} {$fullstring += ("--language", "0:ara", '--track-name', '0:[Arabic] Unstyled'); break }
-        {$_ -like "*Chinese(Hans)*"} {$fullstring += ("--language", "0:chi", '--track-name', '0:[Chinese(traditional)] Unstyled'); break }
-        {$_ -like "*Chinese(Hant)*"} {$fullstring += ("--language", "0:chi", '--track-name', '0:[Chinese (simplified)] Unstyled'); break }
+        {$_ -like "*(Hant)*"} {$fullstring += ("--language", "0:chi", '--track-name', '0:[Chinese (Traditional)] Unstyled'); break }
+        {$_ -like "*Arabic*"} {$fullstring += ("--language", "0:ara", '--track-name', '0:[Arabic] Unstyled'); break }
+        {$_ -like "*Bulgarian*"} {$fullstring += ("--language", "0:bul", '--track-name', '0:[Bulgarian] Unstyled'); break }
+        {$_ -like "*Chinese(Hans)*"} {$fullstring += ("--language", "0:chi", '--track-name', '0:[Chinese (Simplified)] Unstyled'); break }
+        {$_ -like "*Chinese(Hant)*"} {$fullstring += ("--language", "0:chi", '--track-name', '0:[Chinese (Traditional)] Unstyled'); break }
         {$_ -like "*Croatian*"} {$fullstring += ("--language", "0:hrv", '--track-name', '0:[Croatian] Unstyled'); break }
         {$_ -like "*Czech*"} {$fullstring += ("--language", "0:cze", '--track-name', '0:[Czech] Unstyled'); break }
         {$_ -like "*Danish*"} {$fullstring += ("--language", "0:dan", '--track-name', '0:[Danish] Unstyled'); break }
         {$_ -like "*Dutch*"} {$fullstring += ("--language", "0:dut", '--track-name', '0:[Dutch] Unstyled'); break }
-        {$_ -like "*English(GB)*"} {$fullstring += ("--language", "0:eng", '--track-name', '0:[British English] Unstyled'); break }
+        {$_ -like "*English(GB)*"} {$fullstring += ("--language", "0:eng", '--track-name', '0:[UK English] Unstyled'); break }
         {$_ -like "*English(US)*"} {$fullstring += ("--language", "0:eng", '--track-name', '0:[US English] Unstyled'); break }
         {$_ -like "*English(US) CC*"} {$fullstring += ("--language", "0:eng", '--track-name', '0:[US Closed Captions] Unstyled'); break }
         {$_ -like "*English CC*"} {$fullstring += ("--language", "0:eng", '--track-name', '0:[US Closed Captions] Unstyled'); break }
@@ -104,7 +105,7 @@ function Get-Language($incomingSubtitle) {
     return $fullstring
 }
 
-function Remove-ITMStuff {
+function Remove-TNSKItems {
     Param(
         $inputFile, 
         $subtitleDirectory)

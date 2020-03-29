@@ -1,23 +1,23 @@
 ﻿# generic functions
-. (".\it.ps1")
-. (".\itm.ps1")
-. (".\cyroll.ps1")
+. (".\ccextract.ps1")
+. (".\tuneskit.ps1")
+. (".\allavsoft.ps1")
 function Set-SubtitleType {
     param (
         $inputFile
     )
         
     # iTunes movies - Folder with the same name (subs extracted with Tuneskit)
-    if (Test-iTunesMovieSubs $inputFile){
-        return "itms"
+    if (Test-TuneskitSubs $inputFile){
+        return "tksubs"
     }
     # iTunes TV - Same File name - SRT extension (subs extracted with CCextractor)
-    elseif (Test-iTunesTVSubs $inputFile) {
-        return "ittv"
+    elseif (Test-CCextractSubs $inputFile) {
+        return "ccex"
     }
     # Crunchyroll - Same file name - additional enUS (subs extracted with Allavsoft)
-    elseif (Test-CrunchyLanguage $inputFile) {
-        return "chry"
+    elseif (Test-AllavCRSubs $inputFile) {
+        return "allav"
     }
 }
 
@@ -49,12 +49,12 @@ function Get-MKVFullArgs {
     )
     $current_mkv = $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + ".mkv"
     $mkvArgList = @('-o', $current_mkv, $inputFile.FullName)
-    if ($subTitleType -eq "itms") {
-        $mkvArgList += Get-GetITMArgs $inputFile
-    } elseif ($subTitleType -eq "ittv") {
-        $mkvArgList += Get-IttvArgs $inputFile
-    } elseif ($subTitleType -eq "chry") {
-        $mkvArgList += Get-CrunchyArgs $inputfile
+    if ($subTitleType -eq "tnksit") {
+        $mkvArgList += Get-TNSKArgs $inputFile
+    } elseif ($subTitleType -eq "ccex") {
+        $mkvArgList += Get-CCeArgs $inputFile
+    } elseif ($subTitleType -eq "allav") {
+        $mkvArgList += Get-AllavCRArgs $inputfile
     }
     return $mkvArgList
 }
@@ -69,11 +69,11 @@ function Invoke-MKVCreator {
     # $processed_files = Start-Process -FilePath $mkvProgPath -ArgumentList $mkvArgList -Wait -PassThru
     
     if ($LASTEXITCODE -ne '0') {
-        Write-Output "Command failed"
+        Write-Output "Conversion failed"
         exit(1)
     }
 
-    if ($subTitleType -eq "chry") {
+    if ($subTitleType -eq "allav") {
         Set-JapaneseTrack $mkvArgList[1]
     }
 }
@@ -85,9 +85,9 @@ function Invoke-SessionCleanup {
     )
 
     switch ($subTitleType) {
-        "chry" { Remove-CrunchyStuff $inputVideo; Break }
-        "itms" { Remove-ITMStuff $inputVideo; Break }
-        "ittv" { Remove-ITVStuff $inputVideo; Break } 
+        "allav" { Remove-AllavCRItems $inputVideo; Break }
+        "tnskit" { Remove-TNSKItems $inputVideo; Break }
+        "ccex" { Remove-CCeItems $inputVideo; Break } 
         Default {}
     }
 }

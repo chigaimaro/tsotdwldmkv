@@ -1,14 +1,17 @@
 ﻿# Include required files
 param (
     [CmdletBinding()]
-    [string]$videosPath = "D:\Prep-For-Transfer\iTunes Movies" #$($PSScriptRoot)
+    [Parameter(Mandatory=$True)]
+    [string]$videosPath = $($PSScriptRoot),
+    [Parameter(Mandatory=$True)]
+    [string]$subtitleType = "auto"
  )
 
 try {
     . (".\main-lib.ps1")
-    . (".\it.ps1")
-    . (".\itm.ps1")
-    . (".\cyroll.ps1")
+    . (".\ccextract.ps1")
+    . (".\tuneskit.ps1")
+    . (".\allavsoft.ps1")
 }
 catch {
     Write-Host $Error[0] -ForegroundColor Red
@@ -16,7 +19,8 @@ catch {
 }
 function Start-Conversion {
     param(
-        $videosPath
+        $videosPath,
+        $subtitleType
     )
     
     $videoQueue = Read-TargetDirectory $videosPath
@@ -26,12 +30,16 @@ function Start-Conversion {
     }
 
     foreach ($nextVideo in $videoQueue) {
+        if ($subTitleType -eq "auto") {
+            $nextSubTitleType = Set-SubtitleType $nextVideo
+        } else {
+            $nextSubTitleType = $subtitleType
+        }
         
-        $subTitleType = Set-SubtitleType $nextVideo
         if ($null -ne $subTitleType) {
-            $convertARGs = Get-MKVFullArgs $nextVideo $subTitleType
-            Invoke-MKVCreator $convertARGs $subTitleType
-            Invoke-SessionCleanup $nextVideo $subTitleType
+            $convertARGs = Get-MKVFullArgs $nextVideo $nextSubTitleType
+            Invoke-MKVCreator $convertARGs $nextSubTitleType
+            Invoke-SessionCleanup $nextVideo $nextSubTitleType
         } else {
             exit(1)
         }
@@ -39,4 +47,4 @@ function Start-Conversion {
 
 }
 
-Start-Conversion $videosPath
+Start-Conversion $videosPath $subtitleType

@@ -1,7 +1,9 @@
 ﻿# For crunchyroll stuff
-$Global:crunchySubs = (".deDE.ass", ".deDE.srt", ".enUS.ass", ".enUS.srt", ".esES.ass",
-".esES.srt", ".esLA.ass", ".esLA.srt")
-function Test-CrunchyLanguage {
+$Global:crunchySubs = ("arME.ass", "arME.srt", ".deDE.ass", ".deDE.srt", "frFR.srt",
+ "frFR.ass", ".enUS.ass", ".enUS.srt", ".esES.ass", ".esES.srt", ".esLA.ass",
+ ".esLA.srt",  "itIT.ass", "itIT.srt", "ptBR.ass", "ptBR.srt")
+
+function Test-AllavCRSubs {
     param (
         $inputFile
     )
@@ -17,7 +19,7 @@ function Test-CrunchyLanguage {
     }
 }
 
-function Get-CrunchyArgs {
+function Get-AllavCRArgs {
     param (
         $inputFile
     )
@@ -25,13 +27,13 @@ function Get-CrunchyArgs {
     foreach ($subtitle in $crunchySubs) {
         $current_sub = $(Join-Path $inputFile.DirectoryName  $inputFile.BaseName) + $subtitle
         if (Test-Path -Path $current_sub -PathType Leaf) {
-            $mkvSubs += Set-CrunchLang $current_sub
+            $mkvSubs += Set-AllavCRLang $current_sub
         }
     }
     return $mkvSubs
 }
 
-function Set-CrunchLang($current_sub) {
+function Set-AllavCRLang($current_sub) {
     $fullstring = @()
     $crunchyRollLangPattern = [regex]::new('(?<=\.).+?(?=\.)')
     $pulled_language = $crunchyRollLangPattern.Matches($current_sub)
@@ -90,7 +92,7 @@ function Set-CrunchLang($current_sub) {
     return $fullstring
 }
 
-function Remove-CrunchyStuff($video) {
+function Remove-AllavCRItems($video) {
     $fileSet = $($video.BaseName) + ".*"
     $removed_files = Get-ChildItem -Path $video.DirectoryName -Filter $fileSet
     foreach ($file in $removed_files) {

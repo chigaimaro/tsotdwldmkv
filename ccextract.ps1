@@ -1,5 +1,5 @@
 # for Itunes Movies
-function Test-iTunesTVSubs {
+function Test-CCextractSubs {
     param (
         $inputFile
     )
@@ -8,7 +8,7 @@ function Test-iTunesTVSubs {
     return Test-SubPath $ittvDIR
 }
 
-function Get-IttvArgs {
+function Get-CCeArgs {
     param(
         $inputFile
     )
@@ -19,7 +19,7 @@ function Get-IttvArgs {
     return $fullstring
 }
 
-function Remove-ITVStuff {
+function Remove-CCeItems {
     param (
         $inputVideo
     )
