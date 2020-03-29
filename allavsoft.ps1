@@ -1,7 +1,7 @@
 ﻿# For crunchyroll stuff
 $Global:crunchySubs = ("arME.ass", "arME.srt", ".deDE.ass", ".deDE.srt", "frFR.srt",
  "frFR.ass", ".enUS.ass", ".enUS.srt", ".esES.ass", ".esES.srt", ".esLA.ass",
- ".esLA.srt",  "itIT.ass", "itIT.srt", "ptBR.ass", "ptBR.srt")
+ ".esLA.srt",  "itIT.ass", "itIT.srt", "ptBR.ass", "ptBR.srt", "ruRU.ass", "ruRU.srt")
 
 function Test-AllavCRSubs {
     param (
@@ -85,6 +85,11 @@ function Set-AllavCRLang($current_sub) {
         switch ($pulled_extension.value) {
             ".srt" {$fullstring += ('--track-name', '0:"[Arabic] Unstyled"'); Break }
             ".ass" {$fullstring += ('--track-name', '0:"[Arabic] Styled"'); Break }
+        }
+    } elseif ($pulled_language.Value -eq "ruRU") {
+        switch ($pulled_extension.value) {
+            ".srt" {$fullstring += ('--track-name', '0:"[Russian] Unstyled"'); Break }
+            ".ass" {$fullstring += ('--track-name', '0:"[Russian] Styled"'); Break }
         }
     } 
     $fullstring += ("--default-track", "0:no")
