@@ -36,21 +36,26 @@
 param (
     [CmdletBinding()]
     [Parameter(Mandatory=$False)]
-    [string]$videosPath = $($PSScriptRoot),
+    [string]$videosPath = "D:\Prep-For-Transfer", #$($PSScriptRoot),
     [Parameter(Mandatory=$False)]
     [string]$subtitleType = "auto"
  )
 
 try {
-    . (".\main-lib.ps1")
-    . (".\ccextract.ps1")
-    . (".\tuneskit.ps1")
-    . (".\allavsoft.ps1")
+    . ("$PSScriptRoot\main-lib.ps1")
+    . ("$PSScriptRoot\ccextract.ps1")
+    . ("$PSScriptRoot\tuneskit.ps1")
+    . ("$PSScriptRoot\allavsoft.ps1")
 }
 catch {
     Write-Host $Error[0] -ForegroundColor Red
-    Read-Host -Prompt "Press the 'Enter' key to exit" 
+    Read-Host -Prompt "Press the 'Enter' key to exit"
+    exit(1) 
 }
+
+$Global:logfile = Get-LogFile
+$Global:delete_files = $null
+
 function Start-Conversion {
     param(
         $videosPath,
@@ -73,12 +78,12 @@ function Start-Conversion {
         if ($null -ne $subTitleType) {
             $convertARGs = Get-MKVFullArgs $nextVideo $nextSubTitleType
             Invoke-MKVCreator $convertARGs $nextSubTitleType
+        }
+
+        if ($Global:delete_files -eq $true) {
             Invoke-SessionCleanup $nextVideo $nextSubTitleType
-        } else {
-            exit(1)
         }
     }
-
 }
 
 Start-Conversion $videosPath $subtitleType
